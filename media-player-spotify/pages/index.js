@@ -1,16 +1,17 @@
 import Head from 'next/head'
+import SideBar from '../components/SideBar'
+import { MusicNoteIcon } from '@heroicons/react/outline'
 
 export default function Home() {
   return (
-    <div className>
+    <div className='bg-black h-screen overflow-hidden'>
       <Head>
-        <title>Create Next App</title>
+        <title>MBMedia</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h2>hello</h2>
-      <main>
-        {/*SideBar */}
+      <main className=''>
+        <SideBar />
         {/* Main */}
       </main>
 
