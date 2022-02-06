@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
-export const currentSongIdState = atom({
-    key: 'currentSongIdState',
+export const currentTrackIdState = atom({
+    key: 'currentTrackIdState',
     default: null
 })
 
