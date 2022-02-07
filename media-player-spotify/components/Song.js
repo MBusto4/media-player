@@ -1,4 +1,5 @@
-import React from 'react';
+import { HeartIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { currentTrackIdState, isPlayingState } from '../atoms/songAtom';
 import useSpotify from '../hooks/useSpotify';
@@ -8,7 +9,9 @@ const Song = ({ order, song }) => {
     const spotifyApi = useSpotify()
     const [currentSongId, setCurrentSongId] = useRecoilState(currentTrackIdState)
     const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
+    // const [savedSong, setSavedSong] = useState(false)
 
+    // console.log('songs-->', song.track.uri)
     const playSong = () => {
         setCurrentSongId(song.track.id)
         setIsPlaying(true)
@@ -16,9 +19,27 @@ const Song = ({ order, song }) => {
             uris: [song.track.uri]
         })
     }
+    // const handlePlayPauseOnDiv = () => {
+    //     spotifyApi.getMyCurrentPlaybackState().then((data) => {
+    //         if (data.body.is_playing) {
+    //             spotifyApi.pause()
+    //             setIsPlaying(false)
+    //         } else {
+    //             playSong()
+    //             setIsPlaying(true)
+    //         }
+    //     })
+    // }
+    // const saveSong = () => {
+    //     spotifyApi.getMyCurrentPlaybackState().then((data) => {
+    //         if (data.body.is_playing) {
+    //             spotifyApi.addToMySavedTracks()
+    //         }
+    //     })
+    // }
 
     return (
-        <div className='grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-2xl cursor-pointer'
+        <div className='grid grid-cols-3 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-2xl cursor-pointer'
             onClick={playSong}
         >
             <div className='flex items-center space-x-4'>
@@ -30,9 +51,13 @@ const Song = ({ order, song }) => {
                 </div>
             </div>
 
-            <div className='flex items-center justify-between ml-auto md:ml-0'>
-                <p className='hidden md:inline w-40'>{song.track.album.name}</p>
-                <p>{millisToMinutesAndSeconds(song.track.duration_ms)}</p>
+            <div className='flex items-center justify-center ml-auto md:ml-0'>
+                <p className='hidden md:inline w-41'>{song.track.album.name}</p>
+            </div>
+
+            <div className='flex items-center justify-end ml-auto md:ml-0 '>
+                <HeartIcon className='h-5 w-5 mr-5 hover:text-green-500' /*onClick={saveSong}*/ />
+                <p className='text-white'>{millisToMinutesAndSeconds(song.track.duration_ms)}</p>
             </div>
         </div>
     )
