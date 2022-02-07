@@ -19,15 +19,19 @@ const SideBar = () => {
     const { data: session } = useSession()
     const [playlists, setPlaylists] = useState([])
     const [playListId, setPlayListId] = useRecoilState(playListIdState)
-    const [likedSongs, setLikedSongs] = useState(null)
+    const [savedTracks, setSavedTracks] = useState([])
+    const [savedTrackId, setSavedTrackId] = useRecoilState(playListIdState)
+
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()) {
-            spotifyApi.getMySavedTracks().then((data) => {
-                setLikedSongs(data.body.items)
-            })
+            // spotifyApi.getMySavedTracks().then((data) => {
+            //     setSavedTracks(data.body.items)
+            //     console.log(savedTracks)
+            // })
             spotifyApi.getUserPlaylists().then((data) => {
                 setPlaylists(data.body.items)
+                // console.log(data)
             })
         }
     }, [session, spotifyApi]);
